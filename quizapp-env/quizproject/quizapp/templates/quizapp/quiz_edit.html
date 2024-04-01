@@ -1,0 +1,12 @@
+{% extends 'quizapp/base.html' %}
+{% block content %}
+<h1>Quiz!</h1>
+<div style="border-bottom: 2px solid; margin-bottom: 5px;">
+  <h2>問題の編集</h2>
+</div>
+<a class="returnMenu" href="{% url 'quiz-detail' quiz.id %}">戻る</a>
+<form method="post">
+  {% csrf_token %} {{form.as_p}}
+  <input type="submit" value="更新" class="submitButton">
+</form>
+{% endblock content %}

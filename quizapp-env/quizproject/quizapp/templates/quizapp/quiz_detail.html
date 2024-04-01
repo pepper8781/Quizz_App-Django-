@@ -1,0 +1,33 @@
+{% extends 'quizapp/base.html' %}
+{% block content %}
+<h1>Quiz!</h1>
+<div style="display: flex;">
+  <div style="display:flex; margin-left: 15px;">
+    <a href="{% url 'quiz-edit' quiz.id %}" class="editButton">編集</a>
+  </div>
+  <div style="display:flex; margin-left: 15px;">
+    <a href="{% url 'quiz-delete' quiz.id %}" class="deleteButton">削除</a>
+  </div>
+</div>
+<div style="border-bottom: 2px solid; margin-bottom: 5px;">
+<h2>{{quiz.title}}</h2>
+</div>
+<p>{{quiz.statement}}</p>
+<h3>選択肢</h3>
+<p>A:{{quiz.answer_a}}</p>
+<p>B:{{quiz.answer_b}}</p>
+<p>C:{{quiz.answer_c}}</p>
+<p>D:{{quiz.answer_d}}</p>
+<h3>答え：{{quiz.correct_answer}}</h3>
+<p>{{quiz.explanation}}</p>
+
+<a class="returnMenu" href="{% url 'manage-quizzes' %}">戻る</a>
+
+<script>
+  //リロードボタンのスクリプト
+  let btnReload = document.querySelector('.onemore');
+  btnReload.addEventListener('click', ()=>{
+    location.reload();
+  });
+</script>
+{% endblock content %}

@@ -1,0 +1,14 @@
+{% extends 'quizapp/base.html' %}
+{% block content %}
+<h1>Quiz!</h1>
+<div style="border-bottom: 2px solid; margin-bottom: 5px;">
+  <h2>問題の削除</h2>
+</div>
+<a class="returnMenu" href="{% url 'quiz-detail' quiz.id %}">戻る</a>
+<form method="post" style="padding:20px;">
+  {% csrf_token %}
+  <p class="confirm">問題{{quiz.id}}：{{quiz.title}}を本当に削除してしまってもいいですか？</p>
+  {{ form }}
+  <input type="submit" value="削除" class="submitButton" style="margin-top: 30px;">
+</form>
+{% endblock content %}

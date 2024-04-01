@@ -1,0 +1,36 @@
+{% extends 'quizapp/base.html' %}
+{% block content %}
+<h1>Quiz!</h1>
+<div style="border-bottom: 2px solid; margin-bottom: 5px; display:flex; justify-content: space-between;">
+  <h2>{{quiz.title}}　正答率：{{quiz.accuracy_rate}}％</h2>
+  <h2>作成者：<a href="{% url 'userpage' quiz.user %}" class="makername">{{quiz.user}}</a></h2>
+</div>
+<p>{{quiz.statement}}</p>
+<h3>選択肢</h3>
+<ol class="answers" data-id={{quiz.id}}>
+    <li data-answer='A'><span class="answer-text">{{quiz.answer_a}}</span><span class="result"></span></li>
+    <li data-answer='B'><span class="answer-text">{{quiz.answer_b}}</span><span class="result"></span></li>
+    <li data-answer='C'><span class="answer-text">{{quiz.answer_c}}</span><span class="result"></span></li>
+    <li data-answer='D'><span class="answer-text">{{quiz.answer_d}}</span><span class="result"></span></li>
+</ol>
+<!--正解時表示-->
+<div class="comment">
+  <div style="border-bottom: 2px solid; margin-bottom: 5px;">
+    <h2>答え</h2>
+  </div>
+  <p><span class="answer"></span><br>
+  <span class="explanation"></span></p>
+</div>
+<!--不正解時表示-->
+<p class="onemore">もう一度</p>
+
+<a class="returnMenu" href="{% if request.GET.return_path %}{{ request.GET.return_path }}{% else %}{% url 'quizzes' %}{% endif %}">戻る</a>
+
+<script>
+  //リロードボタンのスクリプト
+  let btnReload = document.querySelector('.onemore');
+  btnReload.addEventListener('click', ()=>{
+    location.reload();
+  });
+</script>
+{% endblock content %}

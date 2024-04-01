@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizApp</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div>
+    {% block content %} {% endblock content %}
+  </div>
+  {% block javascript %}
+  <script src="{% static 'js/scripts.js' %}"></script>
+  {% endblock %}
+</body>
+</html>

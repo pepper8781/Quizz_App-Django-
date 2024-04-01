@@ -1,0 +1,75 @@
+{% extends 'quizapp/base.html' %}
+{% block content %}
+<div class="cover"></div>
+<div style="display:flex; justify-content: space-between;">
+  <div class="Logo">
+    <h1>Quiz!</h1>
+  </div>
+  <div class="LoginLogout">
+    {% if user.is_authenticated %}
+    <a href="{% url 'logout' %}" class="logout">ログアウト</a>
+    {% else %}
+    <a href="{% url 'login' %}" class="login">ログイン</a>
+    {% endif %}
+  </div>
+</div>
+{% if user.is_authenticated %}
+<div>
+  <h2>ログイン中: {{request.user}}　<a href="{% url 'manage-quizzes' %}" class="tomypage">マイページ</a><h2>
+</div>
+{% endif %}
+<header style="border-bottom: 2px solid; margin-bottom: 5px;">
+  <div class="container">
+    <div class="menu">
+      <h2 style="border-bottom: none;">問題一覧</h2>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="correctCount">
+      <h2 style="border-bottom: none;">正答数<span class="count">{{correct_answers_count}}</span>/<span class="leque">{{total_quizzes}}</span>　正答率：{{accuracy}}％</h2>
+    </div>
+    {% endif %}
+  </div>
+</header>
+<div>
+  <form method="get" class="searchWrapper">
+  <input type="text" name="search" value="{{search}}" class="searchInput" style="font-size:30px;"/>
+  <input type="submit" value="検索" class="searchButton" style="margin-left: 10px;"/>
+  </form>
+</div>
+<ul class="questions">
+  {% for quiz in quizzes %}
+    <div style="display:flex; justify-content: space-between;">
+      <div>
+        <li class='yet'>
+          <a href="{% url 'quiz' quiz.id %}?return_path={{ request.path|urlencode }}">
+            <span>{{ quiz.title }}</span>
+            <span class="creator">作成者：{{ quiz.user }}</span>
+          </a>
+        </li>
+      </div>
+      <div class="checkMark">
+        {% if user.is_authenticated %}
+          {% if quiz.id in correct_quizzes %}
+            <p style="font-size: 30px; margin:0 auto; display: table-cell; vertical-align: middle;">✓</p>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  {% empty %}
+  <h3 style="padding-left: 20px;">クイズがありません</h3>
+  {% endfor %}
+</ul>
+{% if user.is_authenticated %}
+<p class="retry">再挑戦！</p>
+{% endif %}
+<!--隠しモーダル(回答状況リセット)-->
+<div class="resetModal">
+  <div class="modal-content">
+    <p class="checkSentence">本当にリセットしますか？</p>
+    <div class="resetCheck">
+      <p class="cancel">キャンセル</p>
+      <p class="reset">リセットする！</p>
+    </div>
+  </div>
+</div>
+{% endblock content %}

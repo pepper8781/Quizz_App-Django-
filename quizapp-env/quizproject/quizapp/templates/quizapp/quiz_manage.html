@@ -1,0 +1,51 @@
+{% extends 'quizapp/base.html' %}
+{% block content %}
+<div class="cover"></div>
+<div style="display:flex; justify-content: space-between;">
+  <div class="Logo">
+    <h1>Quiz!</h1>
+  </div>
+  <div class="LoginLogout">
+    {% if user.is_authenticated %}
+    <a href="{% url 'logout' %}" class="logout">ログアウト</a>
+    {% else %}
+    <a href="{% url 'login' %}" class="login">ログイン</a>
+    {% endif %}
+  </div>
+</div>
+{% if user.is_authenticated %}
+<div>
+  <h2>ログイン中: {{request.user}}</h2>
+</div>
+<div style="display:flex; justify-content: space-around;">
+  <div style="width:30%; display:flex;">
+    <a href="{% url 'create-quiz' %}" class="create-quiz">+ 問題作成</a>
+  </div>
+  <div style="width:30%; display:flex;">
+    <a href="{% url 'quizzes' %}" class="mypage">ホーム</a>
+  </div>
+</div>
+{% endif %}
+<div style="border-bottom: 2px solid; margin-bottom: 5px;">
+  <h2>問題管理</h2>
+</div>
+</header>
+<div>
+  <form method="get" class="searchWrapper">
+  <input type="text" name="search" value="{{search}}" class="searchInput" style="font-size:30px;"/>
+  <input type="submit" value="検索" class="searchButton" style="margin-left: 10px;"/>
+  </form> 
+</div>
+<ul class="questions">
+  {% for quiz in myQuizzes %}
+  <div style="display: flex;">
+    <li class="yet">
+      <a href="{% url 'quiz-detail' quiz.id %}">{{quiz.title}}</a>
+    </li>
+  </div>
+  {% empty %}
+  <h3 style="padding-left: 20px;">クイズがありません</h3>
+  {% endfor %}
+</ul>
+<!-- <script src="questions.js"></script> -->
+{% endblock content %}
