@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 
 from django.views.generic.list import ListView
@@ -86,6 +87,10 @@ class QuizListLoginView(LoginView):
 
     def get_success_url(self):
         return reverse_lazy("quizzes")
+      
+    def form_invalid(self, form):
+        messages.error(self.request, 'ログインに失敗しました。ユーザー名またはパスワードが正しくありません。')
+        return super().form_invalid(form)
 
 class RegisterQuizApp(FormView):
     template_name = "quizapp/register.html"

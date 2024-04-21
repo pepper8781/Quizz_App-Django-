@@ -465,3 +465,7 @@ label{
   display: table;
   margin-top: 10px;
 }
+
+.errorlist {
+  display: none;
+}
