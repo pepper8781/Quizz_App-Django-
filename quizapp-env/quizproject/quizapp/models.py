@@ -34,6 +34,7 @@ class Quiz(models.Model):
 
     class Meta:
         ordering = ["createdDate"]
+        
 
 class UserQuizStatus(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

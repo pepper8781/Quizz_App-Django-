@@ -122,7 +122,16 @@ class QuizDetail(LoginRequiredMixin, DetailView):
 
 class QuizEdit(LoginRequiredMixin, UpdateView):
     model = Quiz
-    fields = "__all__"
+    fields = [
+      "title",
+      "statement",
+      "answer_a",
+      "answer_b",
+      "answer_c",
+      "answer_d",
+      "correct_answer",
+      "explanation"
+    ]
     template_name = "quizapp/quiz_edit.html"
     def get_success_url(self):
         # 編集が完了したクイズのIDを取得
