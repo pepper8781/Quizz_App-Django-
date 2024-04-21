@@ -6,3 +6,4 @@ https://www.udemy.com/share/106R9u3@P_m-aEhhQat2NzqqBx9n5Zv28uOBkugMk8NrBPBLV4l_
 
 動くものにはなったけど記述がめちゃくちゃになってしまっている...。まだまだ精進します。
 追記4/22 まだ必要な機能とか欠陥あったので直します
+追記4/22　直しました
